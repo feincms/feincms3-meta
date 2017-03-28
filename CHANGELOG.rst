@@ -11,5 +11,5 @@ Change log
 
 - Initial release!
 
-.. _1.0: https://github.com/matthiask/feincms3-meta/commit/eaf1510905
+.. _1.0: https://github.com/matthiask/feincms3-meta/commit/e50451b5661
 .. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.0...master
