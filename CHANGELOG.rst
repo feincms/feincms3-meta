@@ -5,6 +5,8 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Added more steps to the usage instructions.
+
 
 `1.0`_ (2017-03-28)
 ~~~~~~~~~~~~~~~~~~~
