@@ -6,6 +6,10 @@ Change log
 ~~~~~~~~~~~~~~~
 
 - Added more steps to the usage instructions.
+- Converted the thing into a real package so that we can bundle
+  translations etc. This also means that import paths have changed. The
+  ``MetaMixin`` has to be imported from ``feincms3_meta.models``,
+  ``meta_tags`` and ``meta_tags_html`` from ``feincms3_meta.utils``.
 
 
 `1.0`_ (2017-03-28)

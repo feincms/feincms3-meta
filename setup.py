@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from io import open
 import os
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def read(filename):
@@ -13,7 +13,7 @@ def read(filename):
 
 setup(
     name='feincms3-meta',
-    version='1.0',
+    version=__import__('feincms3_meta').__version__,
     description='',
     long_description=read('README.rst'),
     author='Matthias Kestenholz',
@@ -21,7 +21,10 @@ setup(
     url='https://github.com/matthiask/feincms3-meta/',
     license='BSD License',
     platforms=['OS Independent'],
-    py_modules=['feincms3_meta'],
+    packages=find_packages(
+        exclude=['tests', 'testapp']
+    ),
+    include_package_data=True,
     classifiers=[
         # 'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',

@@ -1,4 +1,6 @@
 include LICENSE
 include MANIFEST.in
 include README.rst
-include feincms3_meta.py
+recursive-include feincms3_meta/static *
+recursive-include feincms3_meta/locale *
+recursive-include feincms3_meta/templates *
