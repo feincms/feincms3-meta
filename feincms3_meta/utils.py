@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.utils.html import format_html
+from django.utils.html import format_html, mark_safe
 
 
 def meta_tags(
@@ -61,17 +61,23 @@ def meta_tags(
 
 def meta_tags_html(*args, **kwargs):
     meta = meta_tags(*args, **kwargs)
-    template = [
-        '<meta property="og:%s" content="{%s}">' % (key, key)
-        for key in sorted(meta.keys())
+    html = [
+        format_html('<meta property="og:{}" content="{}">', key, value)
+        for key, value in sorted(meta.items())
         if key not in ('canonical',)
     ]
-    template.append(
-        '<meta name="description" content="{description}">'
+    html.append(
+        format_html(
+            '<meta name="description" content="{}">',
+            meta.get('description', ''),
+        )
     )
     if meta.get('canonical'):
-        template.append(
-            '<link rel="canonical" href="{canonical}">'
+        html.append(
+            format_html(
+                '<link rel="canonical" href="{}">',
+                meta['canonical'],
+            )
         )
 
-    return format_html('\n  '.join(template), **meta)
+    return mark_safe('\n  '.join(html))

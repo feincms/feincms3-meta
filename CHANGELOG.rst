@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Added support for OpenGraph tags with colons (e.g. ``image:width``
+  and ``image:height``).
+
+
 `1.1`_ (2017-05-03)
 ~~~~~~~~~~~~~~~~~~~
 
