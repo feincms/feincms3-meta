@@ -52,8 +52,10 @@ def meta_tags(
             meta['url'] = request.get_full_path()
 
     for key, value in kwargs.items():
-        if value is not None:
+        if value:
             meta[key] = value
+        elif value is None and key in meta:
+            del meta[key]
 
     for key in url_keys:
         if meta.get(key):
@@ -62,12 +64,14 @@ def meta_tags(
     return meta
 
 
-def meta_tags_html(*args, **kwargs):
-    meta = meta_tags(*args, **kwargs)
+def format_meta_tags(meta):
+    """
+    Return a safe HTML representation of the meta tag dictionary
+    """
     html = [
         format_html('<meta property="og:{}" content="{}">', key, value)
         for key, value in sorted(meta.items())
-        if key not in ('canonical',)
+        if key not in ('canonical',) and value is not None
     ]
     html.append(
         format_html(
@@ -84,3 +88,12 @@ def meta_tags_html(*args, **kwargs):
         )
 
     return mark_safe('\n  '.join(html))
+
+
+def meta_tags_html(*args, **kwargs):
+    """
+    Return meta tags
+
+    This function has the same signature as ``meta_tags`` above.
+    """
+    return format_meta_tags(meta_tags(*args, **kwargs))

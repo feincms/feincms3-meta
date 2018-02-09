@@ -35,4 +35,13 @@ Usage
         ),
     })
 
+   ``meta_tags`` and ``meta_tags_html`` also support overriding or
+   removing individual tags using keyword arguments. Falsy values are
+   discarded, ``None`` causes the complete removal of the tag from the
+   dictionary.
+
+   If you want to modify the dictionary in some way before rendering,
+   use ``feincms3_meta.utils.meta_tags`` together with
+   ``feincms3_meta.utils.format_meta_tags``.
+
 .. _open graph: http://ogp.me/
