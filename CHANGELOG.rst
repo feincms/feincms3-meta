@@ -5,10 +5,18 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+
+`1.2`_ (2018-02-09)
+~~~~~~~~~~~~~~~~~~~
+
 - Added support for OpenGraph tags with colons (e.g. ``image:width``
   and ``image:height``).
-- Discard keyword arguments to ``meta_tags`` and ``meta_tags_html`` with
-  a value of ``None``
+- Modified ``meta_tags`` (and by extension also ``meta_tags_html``) to
+  handle keyword arguments differently: Falsy values are discarded,
+  ``None`` causes the complete removal of the tag from the dictionary
+  respectively from the HTML output.
+- Separated the HTML rendering into ``format_meta_tags`` to make it
+  reusable.
 
 
 `1.1`_ (2017-05-03)
@@ -28,4 +36,5 @@ Change log
 
 .. _1.0: https://github.com/matthiask/feincms3-meta/commit/e50451b5661
 .. _1.1: https://github.com/matthiask/feincms3-meta/compare/1.0...1.1
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.1...master
+.. _1.2: https://github.com/matthiask/feincms3-meta/compare/1.1...1.2
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.2...master
