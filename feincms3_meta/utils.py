@@ -22,7 +22,8 @@ def meta_tags(
 
     Data is taken in order from the following sources:
 
-    - Any keyword arguments to this function
+    - Any keyword arguments to this function (items with a value of ``None``
+      are discarded)
     - Any ``MetaMixin`` instances passed as an iterable
     - The ``META_TAGS`` setting, if available
 
@@ -50,7 +51,9 @@ def meta_tags(
         else:
             meta['url'] = request.get_full_path()
 
-    meta.update(kwargs)
+    for key, value in kwargs.items():
+        if value is not None:
+            meta[key] = value
 
     for key in url_keys:
         if meta.get(key):

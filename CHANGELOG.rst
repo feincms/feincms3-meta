@@ -7,6 +7,8 @@ Change log
 
 - Added support for OpenGraph tags with colons (e.g. ``image:width``
   and ``image:height``).
+- Discard keyword arguments to ``meta_tags`` and ``meta_tags_html`` with
+  a value of ``None``
 
 
 `1.1`_ (2017-05-03)
