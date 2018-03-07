@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Made the return value of ``meta_tags`` a subclass of ``dict`` which
+  renders meta tags as HTML.
+- Added a deprecation warning to ``meta_tags_html``.
+
 
 `1.2`_ (2018-02-09)
 ~~~~~~~~~~~~~~~~~~~
