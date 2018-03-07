@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+
+`1.3`_ (2018-03-07)
+~~~~~~~~~~~~~~~~~~~
+
 - Made the return value of ``meta_tags`` a subclass of ``dict`` which
   renders meta tags as HTML.
 - Added a deprecation warning to ``meta_tags_html``.
@@ -41,4 +45,5 @@ Change log
 .. _1.0: https://github.com/matthiask/feincms3-meta/commit/e50451b5661
 .. _1.1: https://github.com/matthiask/feincms3-meta/compare/1.0...1.1
 .. _1.2: https://github.com/matthiask/feincms3-meta/compare/1.1...1.2
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.2...master
+.. _1.3: https://github.com/matthiask/feincms3-meta/compare/1.2...1.3
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.3...master
