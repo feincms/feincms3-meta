@@ -108,6 +108,6 @@ def meta_tags_html(*args, **kwargs):
         'Use meta_tags instead of meta_tags_html; its return value is also'
         ' directly usable to render all meta tags at once.',
         DeprecationWarning,
-        stacklevel=1,
+        stacklevel=2,
     )
     return meta_tags(*args, **kwargs)
