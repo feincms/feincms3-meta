@@ -67,7 +67,7 @@ def meta_tags(
 
     for key in url_keys:
         if meta.get(key):
-            meta[key] = request.build_absolute_uri(meta[key])
+            meta[key] = request.build_absolute_uri(str(meta[key]))
 
     return meta
 

@@ -41,4 +41,14 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     zip_safe=False,
+    install_requires=[
+        'Django>=1.11',
+    ],
+    extras_require={
+        'tests': [
+            'pytest~=3.3',
+            'pytest-django~=3.1',
+            'coverage~=4.4',
+        ],
+    },
 )
