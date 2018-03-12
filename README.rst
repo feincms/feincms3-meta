@@ -2,6 +2,9 @@
 feincms3-meta
 =============
 
+.. image:: https://travis-ci.org/matthiask/feincms3-meta.svg?branch=master
+   :target: https://travis-ci.org/matthiask/feincms3-meta
+
 Helpers and mixins for making meta and `open graph`_ tags less annoying.
 
 Usage
