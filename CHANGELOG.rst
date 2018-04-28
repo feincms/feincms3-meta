@@ -5,6 +5,9 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Added the possibility to override values from ``META_TAGS`` using an
+  additional ``defaults`` argument to ``meta_tags``.
+
 
 `1.3`_ (2018-03-07)
 ~~~~~~~~~~~~~~~~~~~

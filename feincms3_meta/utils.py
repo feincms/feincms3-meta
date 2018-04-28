@@ -17,6 +17,7 @@ def meta_tags(
         *,
         request,
         url_keys=('canonical', 'image', 'url'),
+        defaults=None,
         **kwargs):
     """
     Return a dictionary containing meta tag information: Keys include
@@ -33,6 +34,7 @@ def meta_tags(
     - Any keyword arguments to this function (items with a value of ``None``
       are discarded)
     - Any ``MetaMixin`` instances passed as an iterable
+    - The ``defaults`` argument, if given
     - The ``META_TAGS`` setting, if available
 
     URLs (all keys in ``url_keys``) are passed through
@@ -44,6 +46,7 @@ def meta_tags(
     """
     meta = MetaTags(type='website')
     meta.update(getattr(settings, 'META_TAGS', {}))
+    meta.update(defaults or {})
 
     for object in reversed(objects):
         meta['title'] = object.meta_title or object.title
