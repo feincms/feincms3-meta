@@ -14,3 +14,11 @@ def test_meta(rf):
 <meta property="og:type" content="website">
   <meta property="og:url" content="http://testserver/">
   <meta name="description" content="">'''
+
+    assert str(meta_tags(
+        request=request,
+        defaults={'title': 'stuff'},
+        title=None,
+    )) == '''\
+<meta property="og:type" content="website">
+  <meta name="description" content="">'''
