@@ -7,6 +7,9 @@ Change log
 
 - Added the possibility to override values from ``META_TAGS`` using an
   additional ``defaults`` argument to ``meta_tags``.
+- Converted the tests to the same structure the other feincms3 packages
+  use, added a tox-based test and style checks while doing that.
+- Increased test coverage.
 
 
 `1.3`_ (2018-03-07)
