@@ -3,6 +3,8 @@ from django.utils.functional import lazy
 
 from feincms3_meta.utils import meta_tags
 
+from .models import Model
+
 
 class MetaTest(test.TestCase):
     def test_meta(self):
@@ -32,3 +34,24 @@ class MetaTest(test.TestCase):
 <meta property="og:type" content="website">
   <meta property="og:url" content="http://testserver/">
   <meta name="description" content="">''')
+
+    def test_model(self):
+        m = Model()
+        request = test.RequestFactory().get('/stuff/')
+        self.assertEqual(
+            str(meta_tags([m], request=request)),
+            '''\
+<meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/stuff/">
+  <meta name="description" content="">''')
+
+        m.meta_canonical = '/bla/'
+        self.assertEqual(
+            str(meta_tags([m], request=request)),
+            '''\
+<meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/bla/">
+  <meta name="description" content="">
+  <link rel="canonical" href="http://testserver/bla/">''')
+
+        # print(str(meta_tags([m], request=request)))

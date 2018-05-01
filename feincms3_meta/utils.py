@@ -12,16 +12,17 @@ class MetaTags(dict):
         return format_meta_tags(self)
 
     def update_from_metamixin(self, object):
-        self['title'] = object.meta_title or object.title
-        if object.meta_description:
-            self['description'] = object.meta_description
-        if object.meta_image:
-            self['image'] = object.meta_image.url
-        elif getattr(object, 'image', None):
-            self['image'] = object.image.url
-        if object.meta_canonical:
-            self['canonical'] = object.meta_canonical
-            self['url'] = object.meta_canonical
+        self.update({
+            'title': object.meta_title or getattr(object, 'title', ''),
+            'description': object.meta_description,
+            'image': (
+                object.meta_image.url if object.meta_image else (
+                    object.image.url if getattr(object, 'image', None) else ''
+                )
+            ),
+            'canonical': object.meta_canonical,
+            'url': object.meta_canonical,
+        })
 
     def update(self, other):
         if other:
@@ -72,7 +73,7 @@ def meta_tags(
     meta.update(defaults)
 
     for object in reversed(objects):
-        meta.update_from_metamixin(object, request=request)
+        meta.update_from_metamixin(object)
 
     meta.update(kwargs)
 
