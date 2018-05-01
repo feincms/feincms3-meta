@@ -54,4 +54,15 @@ class MetaTest(test.TestCase):
   <meta name="description" content="">
   <link rel="canonical" href="http://testserver/bla/">''')
 
+        # meta_title not set, falling back to title
+        m.title = 'test'
+        self.assertEqual(
+            str(meta_tags([m], request=request)),
+            '''\
+<meta property="og:title" content="test">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/bla/">
+  <meta name="description" content="">
+  <link rel="canonical" href="http://testserver/bla/">''')
+
         # print(str(meta_tags([m], request=request)))
