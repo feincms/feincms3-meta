@@ -11,6 +11,26 @@ class MetaTags(dict):
     def __str__(self):
         return format_meta_tags(self)
 
+    def update_from_metamixin(self, object):
+        self['title'] = object.meta_title or object.title
+        if object.meta_description:
+            self['description'] = object.meta_description
+        if object.meta_image:
+            self['image'] = object.meta_image.url
+        elif getattr(object, 'image', None):
+            self['image'] = object.image.url
+        if object.meta_canonical:
+            self['canonical'] = object.meta_canonical
+            self['url'] = object.meta_canonical
+
+    def update(self, other):
+        if other:
+            for key, value in other.items():
+                if value:
+                    self[key] = value
+                elif value is None and key in self:
+                    del self[key]
+
 
 def meta_tags(
         objects=(),
@@ -44,29 +64,17 @@ def meta_tags(
     ``title``, ``description`` and ``image``. See
     `The Open Graph protocol <http://ogp.me/>`_ for additional details.
     """
-    meta = MetaTags(type='website')
-    meta.update(getattr(settings, 'META_TAGS', {}))
-    meta.update(defaults or {})
+    meta = MetaTags(
+        type='website',
+        url=request.get_full_path(),
+    )
+    meta.update(getattr(settings, 'META_TAGS', None))
+    meta.update(defaults)
 
     for object in reversed(objects):
-        meta['title'] = object.meta_title or object.title
-        if object.meta_description:
-            meta['description'] = object.meta_description
-        if object.meta_image:
-            meta['image'] = object.meta_image.url
-        elif getattr(object, 'image', None):
-            meta['image'] = object.image.url
-        if object.meta_canonical:
-            meta['canonical'] = object.meta_canonical
-            meta['url'] = object.meta_canonical
-        else:
-            meta['url'] = request.get_full_path()
+        meta.update_from_metamixin(object, request=request)
 
-    for key, value in kwargs.items():
-        if value:
-            meta[key] = value
-        elif value is None and key in meta:
-            del meta[key]
+    meta.update(kwargs)
 
     for key in url_keys:
         if meta.get(key):

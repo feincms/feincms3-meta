@@ -11,6 +11,7 @@ class MetaTest(test.TestCase):
             str(meta_tags(request=request)),
             '''\
 <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">
   <meta name="description" content="">''')
 
         lazy_url = lazy(lambda: '/', str)()
@@ -29,4 +30,5 @@ class MetaTest(test.TestCase):
             )),
             '''\
 <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">
   <meta name="description" content="">''')
