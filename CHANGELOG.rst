@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+
+`1.4`_ (2018-05-01)
+~~~~~~~~~~~~~~~~~~~
+
 - Added the possibility to override values from ``META_TAGS`` using an
   additional ``defaults`` argument to ``meta_tags``.
 - Converted the tests to the same structure the other feincms3 packages
@@ -52,4 +56,5 @@ Change log
 .. _1.1: https://github.com/matthiask/feincms3-meta/compare/1.0...1.1
 .. _1.2: https://github.com/matthiask/feincms3-meta/compare/1.1...1.2
 .. _1.3: https://github.com/matthiask/feincms3-meta/compare/1.2...1.3
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/1.3...master
+.. _1.4: https://github.com/matthiask/feincms4-meta/compare/1.3...1.4
+.. _Next version: https://github.com/matthiask/feincms4-meta/compare/1.4...master
