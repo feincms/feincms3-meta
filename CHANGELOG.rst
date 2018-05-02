@@ -5,6 +5,9 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Changed the meta tags dictionary to also build absolute URIs when
+  calling ``update()`` after the ``meta_tags`` helper returns.
+
 
 `1.4`_ (2018-05-01)
 ~~~~~~~~~~~~~~~~~~~

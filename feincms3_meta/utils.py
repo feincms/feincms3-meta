@@ -25,9 +25,12 @@ class MetaTags(dict):
         })
 
     def update(self, other):
+        url_keys = self.get('_url_keys', ())
         if other:
             for key, value in other.items():
-                if value:
+                if value and key in url_keys:
+                    self[key] = self['_build_absolute_uri'](str(value))
+                elif value:
                     self[key] = value
                 elif value is None and key in self:
                     del self[key]
@@ -66,9 +69,10 @@ def meta_tags(
     `The Open Graph protocol <http://ogp.me/>`_ for additional details.
     """
     meta = MetaTags(
-        type='website',
-        url=request.get_full_path(),
+        _url_keys=url_keys,
+        _build_absolute_uri=request.build_absolute_uri,
     )
+    meta.update({'type': 'website', 'url': request.get_full_path()})
     meta.update(getattr(settings, 'META_TAGS', None))
     meta.update(defaults)
 
@@ -76,10 +80,6 @@ def meta_tags(
         meta.update_from_metamixin(object)
 
     meta.update(kwargs)
-
-    for key in url_keys:
-        if meta.get(key):
-            meta[key] = request.build_absolute_uri(str(meta[key]))
 
     return meta
 
@@ -91,7 +91,11 @@ def format_meta_tags(meta):
     html = [
         format_html('<meta property="og:{}" content="{}">', key, value)
         for key, value in sorted(meta.items())
-        if key not in ('canonical',) and value is not None
+        if (
+            key not in ('canonical',)
+            and not key.startswith('_')
+            and value is not None
+        )
     ]
     html.append(
         format_html(
