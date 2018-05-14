@@ -7,6 +7,9 @@ Change log
 
 - Changed the meta tags dictionary to also build absolute URIs when
   calling ``update()`` after the ``meta_tags`` helper returns.
+- Switched the preferred quote to ``"`` and started using `black
+  <https://pypi.org/project/black/>`_ to automatically format Python
+  code.
 
 
 `1.4`_ (2018-05-01)
