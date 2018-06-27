@@ -7,7 +7,6 @@ from .models import Model
 
 
 class MetaTest(test.TestCase):
-
     def test_meta(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(

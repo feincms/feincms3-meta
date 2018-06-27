@@ -35,7 +35,10 @@ class MetaMixin(models.Model):
     def admin_fieldset(cls, **kwargs):
         cfg = {
             "fields": (
-                "meta_title", "meta_description", "meta_image", "meta_canonical"
+                "meta_title",
+                "meta_description",
+                "meta_image",
+                "meta_canonical",
             ),
             "classes": ("tabbed",),
         }

@@ -8,7 +8,6 @@ from django.utils.html import format_html, html_safe, mark_safe
 
 @html_safe
 class MetaTags(dict):
-
     def __str__(self):
         return format_meta_tags(self)
 
