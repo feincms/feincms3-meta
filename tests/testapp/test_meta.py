@@ -13,8 +13,7 @@ class MetaTest(test.TestCase):
             str(meta_tags(request=request)),
             """\
 <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">
-  <meta name="description" content="">""",
+  <meta property="og:url" content="http://testserver/">""",
         )
 
         lazy_url = lazy(lambda: "/", str)()
@@ -22,16 +21,14 @@ class MetaTest(test.TestCase):
             str(meta_tags(url=lazy_url, request=request)),
             """\
 <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">
-  <meta name="description" content="">""",
+  <meta property="og:url" content="http://testserver/">""",
         )
 
         self.assertEqual(
             str(meta_tags(request=request, defaults={"title": "stuff"}, title=None)),
             """\
 <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">
-  <meta name="description" content="">""",
+  <meta property="og:url" content="http://testserver/">""",
         )
 
     def test_model(self):
@@ -41,8 +38,7 @@ class MetaTest(test.TestCase):
             str(meta_tags([m], request=request)),
             """\
 <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/stuff/">
-  <meta name="description" content="">""",
+  <meta property="og:url" content="http://testserver/stuff/">""",
         )
 
         m.meta_canonical = "/bla/"
@@ -51,7 +47,6 @@ class MetaTest(test.TestCase):
             """\
 <meta property="og:type" content="website">
   <meta property="og:url" content="http://testserver/bla/">
-  <meta name="description" content="">
   <link rel="canonical" href="http://testserver/bla/">""",
         )
 
@@ -63,8 +58,21 @@ class MetaTest(test.TestCase):
 <meta property="og:title" content="test">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://testserver/bla/">
-  <meta name="description" content="">
   <link rel="canonical" href="http://testserver/bla/">""",
+        )
+
+        m = Model()
+        m.meta_title = "title-test"
+        # Generate both name="description" and property="og:description"
+        m.meta_description = "description-test"
+        self.assertEqual(
+            str(meta_tags([m], request=request)),
+            """\
+<meta property="og:description" content="description-test">
+  <meta property="og:title" content="title-test">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/stuff/">
+  <meta name="description" content="description-test">""",
         )
 
         # print(str(meta_tags([m], request=request)))

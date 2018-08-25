@@ -7,6 +7,8 @@ Change log
 
 - Changed the meta tags dictionary to also build absolute URIs when
   calling ``update()`` after the ``meta_tags`` helper returns.
+- Changed ``meta_tags`` to no longer produce a ``<meta
+  name="description" content="">`` tag if the description is empty.
 - Switched the preferred quote to ``"`` and started using `black
   <https://pypi.org/project/black/>`_ to automatically format Python
   code.

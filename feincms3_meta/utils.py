@@ -93,11 +93,10 @@ def format_meta_tags(meta):
         for key, value in sorted(meta.items())
         if (key not in ("canonical",) and not key.startswith("_") and value is not None)
     ]
-    html.append(
-        format_html(
-            '<meta name="description" content="{}">', meta.get("description", "")
+    if meta.get("description"):
+        html.append(
+            format_html('<meta name="description" content="{}">', meta["description"])
         )
-    )
     if meta.get("canonical"):
         html.append(format_html('<link rel="canonical" href="{}">', meta["canonical"]))
 
