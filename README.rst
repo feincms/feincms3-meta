@@ -9,6 +9,11 @@ Helpers and mixins for making meta and `open graph <http://ogp.me/>`__
 tags less annoying.
 
 Documentation is available as a part of `feincms3
-<https://feincms3.readthedocs.io/>`__'s documentation. The guide's title
-is "Meta and OpenGraph tags". Despite this feincms3-meta can also be
-used standalone.
+<https://feincms3.readthedocs.io/>`__'s documentation.
+
+The guide is here: `Meta and OpenGraph tags
+<https://feincms3.readthedocs.io/en/latest/guides/meta-opengraph-tags.html>`__
+The guide's title
+
+Despite its name and the fact that it is documented as a part of
+feincms3, feincms3-meta can also be used standalone.
