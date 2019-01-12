@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
 
-import warnings
-
 from django.conf import settings
 from django.utils.html import format_html, html_safe, mark_safe
 
