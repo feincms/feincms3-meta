@@ -45,8 +45,8 @@ class MetaTags(dict):
         )
 
     def update(self, other):
-        url_keys = self.get("_url_keys", ())
         if other:
+            url_keys = self.get("_url_keys", ())
             for key, value in other.items():
                 if value and key in url_keys:
                     self[key] = self["_build_absolute_uri"](str(value))
