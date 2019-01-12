@@ -38,6 +38,9 @@ class MetaTags(dict):
                     else (object.image.url if getattr(object, "image", None) else "")
                 ),
                 "canonical": object.meta_canonical,
+                # Override URL if canonical is set to a non-empty value (""
+                # leaves the original value unchanged, None would remove it but
+                # meta_canonical is not nullable so that won't happen)
                 "url": object.meta_canonical,
                 "author": object.meta_author,
                 "robots": object.meta_robots,
