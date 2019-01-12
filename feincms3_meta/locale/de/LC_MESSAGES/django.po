@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 10:28+0200\n"
+"POT-Creation-Date: 2019-01-12 18:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,22 @@ msgstr "kanonische URL"
 msgid "If you need this you probably know."
 msgstr "Sie werden selbst wissen ob Sie dies benötigen."
 
-#: models.py:44
+#: models.py:31
+msgid "author"
+msgstr "Autor"
+
+#: models.py:34
+msgid "Override the author meta tag."
+msgstr "Das Meta-Tag für den Autorennamen überschreiben."
+
+#: models.py:37
+msgid "robots"
+msgstr "Robots"
+
+#: models.py:40
+msgid "Override the robots meta tag."
+msgstr "Das Meta-Tag für die Robots (Suchmaschinen-Crawler) überschreiben."
+
+#: models.py:60
 msgid "Meta tags"
 msgstr "Meta-Tags"
