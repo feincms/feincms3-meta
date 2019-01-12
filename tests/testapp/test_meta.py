@@ -7,7 +7,7 @@ from .models import Model
 
 
 class MetaTest(test.TestCase):
-    def test_meta(self):
+    def test_basic_meta_tags(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(
             str(meta_tags(request=request)),
@@ -16,12 +16,12 @@ class MetaTest(test.TestCase):
   <meta property="og:url" content="http://testserver/">""",
         )
 
-        lazy_url = lazy(lambda: "/", str)()
+        lazy_url = lazy(lambda: "/lazy/", str)()
         self.assertEqual(
             str(meta_tags(url=lazy_url, request=request)),
             """\
 <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+  <meta property="og:url" content="http://testserver/lazy/">""",
         )
 
         self.assertEqual(
@@ -76,3 +76,12 @@ class MetaTest(test.TestCase):
         )
 
         # print(str(meta_tags([m], request=request)))
+
+    def test_unknown_attribute_not_rendered(self):
+        request = test.RequestFactory().get("/")
+        self.assertEqual(
+            str(meta_tags([], request=request, unknown="Stuff")),
+            """\
+<meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">""",
+        )
