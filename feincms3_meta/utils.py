@@ -101,18 +101,3 @@ def format_meta_tags(meta):
         html.append(format_html('<link rel="canonical" href="{}">', meta["canonical"]))
 
     return mark_safe("\n  ".join(html))
-
-
-def meta_tags_html(*args, **kwargs):
-    """
-    Return meta tags
-
-    This function has the same signature as ``meta_tags`` above.
-    """
-    warnings.warn(
-        "Use meta_tags instead of meta_tags_html; its return value is also"
-        " directly usable to render all meta tags at once.",
-        DeprecationWarning,
-        stacklevel=2,
-    )
-    return meta_tags(*args, **kwargs)

@@ -12,6 +12,7 @@ Change log
 - Switched the preferred quote to ``"`` and started using `black
   <https://pypi.org/project/black/>`_ to automatically format Python
   code.
+- Removed the deprecated ``meta_tags_html`` function.
 
 
 `1.4`_ (2018-05-01)
