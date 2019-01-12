@@ -6,6 +6,24 @@ from django.conf import settings
 from django.utils.html import format_html, html_safe, mark_safe
 
 
+TEMPLATES = {
+    "opengraph": '<meta property="{name}" content="{content}">',
+    "meta": '<meta name="{name}" content="{content}">',
+    "link": '<link rel="{name}" href="{content}">',
+}
+TAGS = [
+    ("opengraph", "og:description", "description"),
+    ("opengraph", "og:image", "image"),
+    ("opengraph", "og:title", "title"),
+    ("opengraph", "og:type", "type"),
+    ("opengraph", "og:url", "url"),
+    ("meta", "description", "description"),
+    ("meta", "author", "author"),
+    ("meta", "robots", "robots"),
+    ("link", "canonical", "canonical"),
+]
+
+
 @html_safe
 class MetaTags(dict):
     def __str__(self):
@@ -23,6 +41,8 @@ class MetaTags(dict):
                 ),
                 "canonical": object.meta_canonical,
                 "url": object.meta_canonical,
+                "author": object.meta_author,
+                "robots": object.meta_robots,
             }
         )
 
@@ -55,6 +75,8 @@ def meta_tags(
     - ``image`` (Full URL)
     - ``canonical`` (Full URL)
     - ``url`` (Full URL, overridden using ``canonical``)
+    - ``author``
+    - ``robots``
 
     Data is taken in order from the following sources:
 
@@ -89,15 +111,8 @@ def format_meta_tags(meta):
     Return a safe HTML representation of the meta tag dictionary
     """
     html = [
-        format_html('<meta property="og:{}" content="{}">', key, value)
-        for key, value in sorted(meta.items())
-        if (key not in ("canonical",) and not key.startswith("_") and value is not None)
+        format_html(TEMPLATES[template], name=name, content=meta[content])
+        for template, name, content in TAGS
+        if meta.get(content)
     ]
-    if meta.get("description"):
-        html.append(
-            format_html('<meta name="description" content="{}">', meta["description"])
-        )
-    if meta.get("canonical"):
-        html.append(format_html('<link rel="canonical" href="{}">', meta["canonical"]))
-
     return mark_safe("\n  ".join(html))

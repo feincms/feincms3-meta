@@ -27,6 +27,18 @@ class MetaMixin(models.Model):
         blank=True,
         help_text=_("If you need this you probably know."),
     )
+    meta_author = models.CharField(
+        _("author"),
+        max_length=200,
+        blank=True,
+        help_text=_("Override the author meta tag."),
+    )
+    meta_robots = models.CharField(
+        _("robots"),
+        max_length=200,
+        blank=True,
+        help_text=_("Override the robots meta tag."),
+    )
 
     class Meta:
         abstract = True
@@ -39,6 +51,8 @@ class MetaMixin(models.Model):
                 "meta_description",
                 "meta_image",
                 "meta_canonical",
+                "meta_author",
+                "meta_robots",
             ),
             "classes": ("tabbed",),
         }

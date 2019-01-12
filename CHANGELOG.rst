@@ -13,6 +13,7 @@ Change log
   <https://pypi.org/project/black/>`_ to automatically format Python
   code.
 - Removed the deprecated ``meta_tags_html`` function.
+- Added new fields for overriding the author and robots meta tags.
 
 
 `1.4`_ (2018-05-01)
