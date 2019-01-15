@@ -5,6 +5,12 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Reworked the internals of the utils module and made the API surface
+  smaller.
+- Added back support for the ``og:image:width`` and ``og:image:height``
+  tags.
+
+
 `1.5`_ (2019-01-12)
 ~~~~~~~~~~~~~~~~~~~
 

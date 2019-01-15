@@ -58,3 +58,20 @@ class MetaMixin(models.Model):
         }
         cfg.update(kwargs)
         return (_("Meta tags"), cfg)
+
+    def meta_dict(self):
+        return {
+            "title": self.meta_title or getattr(self, "title", ""),
+            "description": self.meta_description,
+            "image": (
+                self.meta_image.url
+                if self.meta_image
+                else (self.image.url if getattr(self, "image", None) else "")
+            ),
+            "canonical": self.meta_canonical,
+            # Override URL if canonical is set to a non-empty value (the empty
+            # string will be skipped when merging this dictionary)
+            "url": self.meta_canonical,
+            "author": self.meta_author,
+            "robots": self.meta_robots,
+        }
