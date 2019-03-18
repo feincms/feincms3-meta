@@ -1,4 +1,5 @@
 from django import test
+from django.test.utils import override_settings
 from django.utils.functional import lazy
 
 from feincms3_meta.utils import meta_tags
@@ -78,6 +79,40 @@ class MetaTest(test.TestCase):
         # print(str(meta_tags([m], request=request)))
 
     def test_unknown_attribute_not_rendered(self):
+        request = test.RequestFactory().get("/")
+        self.assertEqual(
+            str(meta_tags([], request=request, unknown="Stuff")),
+            """\
+<meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">""",
+        )
+
+    @override_settings(
+        META_TAGS={
+            "site_name": "site",
+            "title": "t",
+            "description": "desc",
+            "image": "/logo.png",
+            "robots": "noindex",
+        }
+    )
+    def test_setting(self):
+        request = test.RequestFactory().get("/")
+        self.assertEqual(
+            str(meta_tags([], request=request, unknown="Stuff")),
+            """\
+<meta property="og:description" content="desc">
+  <meta property="og:image" content="http://testserver/logo.png">
+  <meta property="og:site_name" content="site">
+  <meta property="og:title" content="t">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">
+  <meta name="description" content="desc">
+  <meta name="robots" content="noindex">""",
+        )
+
+    @override_settings(META_TAGS=None)
+    def test_setting_none(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(
             str(meta_tags([], request=request, unknown="Stuff")),
