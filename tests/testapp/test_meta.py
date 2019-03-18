@@ -2,7 +2,7 @@ from django import test
 from django.test.utils import override_settings
 from django.utils.functional import lazy
 
-from feincms3_meta.utils import meta_tags
+from feincms3_meta.utils import MetaTags, meta_tags
 
 from .models import Model
 
@@ -120,3 +120,10 @@ class MetaTest(test.TestCase):
 <meta property="og:type" content="website">
   <meta property="og:url" content="http://testserver/">""",
         )
+
+    def test_as_dict(self):
+        mt = MetaTags()
+        self.assertEqual(str(mt), "")
+
+        mt["url"] = "test"
+        self.assertEqual(str(mt), '<meta property="og:url" content="test">')
