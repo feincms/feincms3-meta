@@ -5,7 +5,7 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
-- Reinstated the support for ``og:site_name`` which was losot in the
+- Reinstated the support for ``og:site_name`` which was lost in the
   rework leading to 2.0.
 
 
