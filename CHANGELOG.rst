@@ -5,6 +5,9 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+`3.0`_ (2019-06-21)
+~~~~~~~~~~~~~~~~~~~
+
 - Reinstated the support for ``og:site_name`` which was lost in the
   rework leading to 2.0.
 - Added a `django-imagefield
@@ -88,4 +91,5 @@ Change log
 .. _1.4: https://github.com/matthiask/feincms3-meta/compare/1.3...1.4
 .. _1.5: https://github.com/matthiask/feincms3-meta/compare/1.4...1.5
 .. _2.0: https://github.com/matthiask/feincms3-meta/compare/1.5...2.0
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/2.0...master
+.. _3.0: https://github.com/matthiask/feincms3-meta/compare/2.0...3.0
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/3.0...master
