@@ -7,6 +7,9 @@ Change log
 
 - Reinstated the support for ``og:site_name`` which was lost in the
   rework leading to 2.0.
+- Added a `django-imagefield
+  <https://github.com/matthiask/django-imagefield>`__ dependency which
+  allows us to provide OpenGraph images in the best format.
 
 
 `2.0`_ (2019-01-15)

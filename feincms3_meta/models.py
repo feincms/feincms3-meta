@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from imagefield.fields import ImageField
+
 
 class MetaMixin(models.Model):
     meta_title = models.CharField(
@@ -16,11 +18,13 @@ class MetaMixin(models.Model):
         blank=True,
         help_text=_("Override the description for this page."),
     )
-    meta_image = models.ImageField(
+    meta_image = ImageField(
         _("image"),
         blank=True,
+        auto_add_fields=True,
         upload_to="meta/%Y/%m",
         help_text=_("Set the Open Graph image."),
+        formats={"recommended": ("default", ("crop", (1200, 630)))},
     )
     meta_canonical = models.URLField(
         _("canonical URL"),
@@ -50,6 +54,7 @@ class MetaMixin(models.Model):
                 "meta_title",
                 "meta_description",
                 "meta_image",
+                "meta_image_ppoi",
                 "meta_canonical",
                 "meta_author",
                 "meta_robots",
@@ -60,14 +65,9 @@ class MetaMixin(models.Model):
         return (_("Meta tags"), cfg)
 
     def meta_dict(self):
-        return {
+        ctx = {
             "title": self.meta_title or getattr(self, "title", ""),
             "description": self.meta_description,
-            "image": (
-                self.meta_image.url
-                if self.meta_image
-                else (self.image.url if getattr(self, "image", None) else "")
-            ),
             "canonical": self.meta_canonical,
             # Override URL if canonical is set to a non-empty value (the empty
             # string will be skipped when merging this dictionary)
@@ -75,3 +75,18 @@ class MetaMixin(models.Model):
             "author": self.meta_author,
             "robots": self.meta_robots,
         }
+        ctx.update(self.meta_images_dict())
+        return ctx
+
+    def meta_images_dict(self):
+        if self.meta_image:
+            return {
+                "image": str(self.meta_image.recommended),
+                "image:width": 1200,
+                "image:height": 630,
+            }
+
+        elif getattr(self, "image", None):
+            return {"image": self.image.url}
+
+        return {"image": ""}
