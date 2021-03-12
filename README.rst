@@ -2,7 +2,7 @@
 feincms3-meta
 =============
 
-.. image:: https://github.com/matthiask/feincms3-meta/actions/workflows/test.yml/badge.svg
+.. image:: https://github.com/matthiask/feincms3-meta/actions/workflows/tests.yml/badge.svg
     :target: https://github.com/matthiask/feincms3-meta/
     :alt: CI Status
 
