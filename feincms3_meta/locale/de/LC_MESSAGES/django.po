@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-12 18:14+0100\n"
+"POT-Creation-Date: 2021-03-12 09:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,54 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:9
+#: models.py:10
 msgid "title"
 msgstr "Titel"
 
-#: models.py:12
+#: models.py:13
 msgid "Used for Open Graph and other meta tags."
 msgstr "Wird für Open Graph und andere Meta-Tags verwendet."
 
-#: models.py:15
+#: models.py:16
 msgid "description"
 msgstr "Beschreibung"
 
-#: models.py:17
+#: models.py:18
 msgid "Override the description for this page."
-msgstr "Die Beschreibung dieser Seite überschreiben."
+msgstr "Die Beschreibung dieser Seite explizit setzen."
 
-#: models.py:20
+#: models.py:21
 msgid "image"
 msgstr "Bild"
 
-#: models.py:23
+#: models.py:25
 msgid "Set the Open Graph image."
 msgstr "Das Open Graph Bild setzen."
 
-#: models.py:26
+#: models.py:29
 msgid "canonical URL"
 msgstr "kanonische URL"
 
-#: models.py:28
+#: models.py:31
 msgid "If you need this you probably know."
 msgstr "Sie werden selbst wissen ob Sie dies benötigen."
 
-#: models.py:31
-msgid "author"
-msgstr "Autor"
-
 #: models.py:34
-msgid "Override the author meta tag."
-msgstr "Das Meta-Tag für den Autorennamen überschreiben."
+msgid "author"
+msgstr "Autor*in"
 
 #: models.py:37
+msgid "Override the author meta tag."
+msgstr "Das Meta-Tag für den Autor*innennamen überschreiben."
+
+#: models.py:40
 msgid "robots"
 msgstr "Robots"
 
-#: models.py:40
+#: models.py:43
 msgid "Override the robots meta tag."
 msgstr "Das Meta-Tag für die Robots (Suchmaschinen-Crawler) überschreiben."
 
-#: models.py:60
+#: models.py:64
 msgid "Meta tags"
 msgstr "Meta-Tags"
