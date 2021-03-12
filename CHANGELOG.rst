@@ -5,6 +5,9 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Switched to a declarative setup.
+- Switched from Travis CI to GitHub actions.
+
 `3.0`_ (2019-06-21)
 ~~~~~~~~~~~~~~~~~~~
 

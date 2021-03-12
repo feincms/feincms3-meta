@@ -2,8 +2,9 @@
 feincms3-meta
 =============
 
-.. image:: https://travis-ci.org/matthiask/feincms3-meta.svg?branch=master
-   :target: https://travis-ci.org/matthiask/feincms3-meta
+.. image:: https://github.com/matthiask/feincms3-meta/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/matthiask/feincms3-meta/
+    :alt: CI Status
 
 Helpers and mixins for making meta and `open graph <http://ogp.me/>`__
 tags less annoying.

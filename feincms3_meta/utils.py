@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.utils.html import format_html, html_safe, mark_safe
 
-
 TEMPLATES = {
     "opengraph": '<meta property="{name}" content="{content}">',
     "meta": '<meta name="{name}" content="{content}">',
