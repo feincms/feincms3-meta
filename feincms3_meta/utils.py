@@ -1,7 +1,10 @@
 from __future__ import unicode_literals
 
+import re
+
 from django.conf import settings
-from django.utils.html import format_html, html_safe, mark_safe
+from django.utils.html import escape, html_safe, mark_safe
+
 
 TEMPLATES = {
     "opengraph": '<meta property="{name}" content="{content}">',
@@ -25,6 +28,24 @@ TAGS = [
 URLS = {"canonical", "image", "url"}
 
 
+_attribute_escapes = {
+    ord("<"): "&lt;",
+    ord(">"): "&gt;",
+    ord("&"): "&amp;",
+}
+
+
+def escape_attribute(s):
+    """
+    Preserve single quotes etc. in attribute values if it is safe. Some user
+    agents do not seem to interpret HTML entities in Open Graph values
+    correctly.
+    """
+    if re.match(r"^[-\w\s_'&:;.,/()]+$", s, re.I | re.U):
+        return s.translate(_attribute_escapes)
+    return escape(s)
+
+
 @html_safe
 class MetaTags(dict):
     def __str__(self):
@@ -34,10 +55,11 @@ class MetaTags(dict):
         uri = self.get("build_absolute_uri", lambda x: x)
         return mark_safe(
             "\n  ".join(
-                format_html(
-                    TEMPLATES[template],
+                TEMPLATES[template].format(
                     name=name,
-                    content=uri(str(self[key])) if key in URLS else self[key],
+                    content=escape_attribute(
+                        uri(str(self[key])) if key in URLS else str(self[key])
+                    ),
                 )
                 for template, name, key in TAGS
                 if self.get(key)

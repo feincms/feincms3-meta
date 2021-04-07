@@ -7,6 +7,9 @@ Change log
 
 - Switched to a declarative setup.
 - Switched from Travis CI to GitHub actions.
+- Changed the HTML generation to preserve single quotes etc. in Open Graph tags
+  when it is safe to do so.
+
 
 `3.0`_ (2019-06-21)
 ~~~~~~~~~~~~~~~~~~~
