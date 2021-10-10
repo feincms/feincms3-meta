@@ -10,16 +10,19 @@ class MetaMixin(models.Model):
         _("title"),
         max_length=200,
         blank=True,
+        null=True,
         help_text=_("Used for Open Graph and other meta tags."),
     )
     meta_description = models.TextField(
         _("description"),
         blank=True,
+        null=True,
         help_text=_("Override the description for this page."),
     )
     meta_image = ImageField(
         _("image"),
         blank=True,
+        null=True,
         auto_add_fields=True,
         upload_to="meta/%Y/%m",
         help_text=_("Set the Open Graph image."),
@@ -28,18 +31,21 @@ class MetaMixin(models.Model):
     meta_canonical = models.URLField(
         _("canonical URL"),
         blank=True,
+        null=True,
         help_text=_("If you need this you probably know."),
     )
     meta_author = models.CharField(
         _("author"),
         max_length=200,
         blank=True,
+        null=True,
         help_text=_("Override the author meta tag."),
     )
     meta_robots = models.CharField(
         _("robots"),
         max_length=200,
         blank=True,
+        null=True,
         help_text=_("Override the robots meta tag."),
     )
 

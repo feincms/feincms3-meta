@@ -5,6 +5,7 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Make all fields nullable.
 - Switched to a declarative setup.
 - Switched from Travis CI to GitHub actions.
 - Changed the HTML generation to preserve single quotes etc. in Open Graph tags
