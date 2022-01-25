@@ -26,6 +26,14 @@ class MetaTest(test.TestCase):
         )
 
         self.assertEqual(
+            str(meta_tags(request=request, defaults={"title": "stuff"}, title="")),
+            """\
+<meta property="og:title" content="stuff">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://testserver/">""",
+        )
+
+        self.assertEqual(
             str(meta_tags(request=request, defaults={"title": "stuff"}, title=None)),
             """\
 <meta property="og:type" content="website">
