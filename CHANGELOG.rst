@@ -10,6 +10,8 @@ Change log
 - Changed the HTML generation to preserve single quotes etc. in Open Graph tags
   when it is safe to do so.
 - Raised the minimum requirement to Python >= 3.8, Django >= 3.2.
+- Added a unittest verifying that blank strings are skipped.
+- Removed the strange whitespace between tags.
 
 
 `3.0`_ (2019-06-21)

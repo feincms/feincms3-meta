@@ -13,31 +13,31 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags(request=request)),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
         )
 
         lazy_url = lazy(lambda: "/lazy/", str)()
         self.assertEqual(
             str(meta_tags(url=lazy_url, request=request)),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/lazy/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/lazy/">""",
         )
 
         self.assertEqual(
             str(meta_tags(request=request, defaults={"title": "stuff"}, title="")),
             """\
-<meta property="og:title" content="stuff">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+<meta property="og:title" content="stuff">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
         )
 
         self.assertEqual(
             str(meta_tags(request=request, defaults={"title": "stuff"}, title=None)),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
         )
 
     def test_model(self):
@@ -46,17 +46,17 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([m], request=request)),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/stuff/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/stuff/">""",
         )
 
         m.meta_canonical = "/bla/"
         self.assertEqual(
             str(meta_tags([m], request=request)),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/bla/">
-  <link rel="canonical" href="http://testserver/bla/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/bla/">\
+<link rel="canonical" href="http://testserver/bla/">""",
         )
 
         # meta_title not set, falling back to title
@@ -64,10 +64,10 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([m], request=request)),
             """\
-<meta property="og:title" content="test">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/bla/">
-  <link rel="canonical" href="http://testserver/bla/">""",
+<meta property="og:title" content="test">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/bla/">\
+<link rel="canonical" href="http://testserver/bla/">""",
         )
 
         m = Model()
@@ -77,11 +77,11 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([m], request=request)),
             """\
-<meta property="og:description" content="description-test">
-  <meta property="og:title" content="title-test">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/stuff/">
-  <meta name="description" content="description-test">""",
+<meta property="og:description" content="description-test">\
+<meta property="og:title" content="title-test">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/stuff/">\
+<meta name="description" content="description-test">""",
         )
 
         # print(str(meta_tags([m], request=request)))
@@ -91,8 +91,8 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([], request=request, unknown="Stuff")),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
         )
 
     @override_settings(
@@ -109,14 +109,14 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([], request=request, unknown="Stuff")),
             """\
-<meta property="og:description" content="desc">
-  <meta property="og:image" content="http://testserver/logo.png">
-  <meta property="og:site_name" content="site">
-  <meta property="og:title" content="t">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">
-  <meta name="description" content="desc">
-  <meta name="robots" content="noindex">""",
+<meta property="og:description" content="desc">\
+<meta property="og:image" content="http://testserver/logo.png">\
+<meta property="og:site_name" content="site">\
+<meta property="og:title" content="t">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">\
+<meta name="description" content="desc">\
+<meta name="robots" content="noindex">""",
         )
 
     @override_settings(META_TAGS=None)
@@ -125,8 +125,8 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(meta_tags([], request=request, unknown="Stuff")),
             """\
-<meta property="og:type" content="website">
-  <meta property="og:url" content="http://testserver/">""",
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
         )
 
     def test_as_dict(self):

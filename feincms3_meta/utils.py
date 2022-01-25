@@ -52,7 +52,7 @@ class MetaTags(dict):
         """
         uri = self.get("build_absolute_uri", lambda x: x)
         return mark_safe(
-            "\n  ".join(
+            "".join(
                 TEMPLATES[template].format(
                     name=name,
                     content=escape_attribute(
