@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+
+`4.1`_ (2022-01-27)
+~~~~~~~~~~~~~~~~~~~
+
 - Renamed the default image spec for the ``meta_image`` from ``recommended`` to
   ``opengraph``. This shouldn't affect your code except if you referenced the
   undocumented ``recommended`` spec somewhere.
@@ -110,4 +114,5 @@ Change log
 .. _2.0: https://github.com/matthiask/feincms3-meta/compare/1.5...2.0
 .. _3.0: https://github.com/matthiask/feincms3-meta/compare/2.0...3.0
 .. _4.0: https://github.com/matthiask/feincms3-meta/compare/4.0...4.0
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.0...master
+.. _4.1: https://github.com/matthiask/feincms3-meta/compare/4.1...4.1
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.1...master
