@@ -5,6 +5,10 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Renamed the default image spec for the ``meta_image`` from ``recommended`` to
+  ``opengraph``. This shouldn't affect your code except if you referenced the
+  undocumented ``recommended`` spec somewhere.
+
 
 `4.0`_ (2022-01-25)
 ~~~~~~~~~~~~~~~~~~~

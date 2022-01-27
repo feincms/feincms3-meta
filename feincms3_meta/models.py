@@ -21,7 +21,7 @@ class MetaMixin(models.Model):
         auto_add_fields=True,
         upload_to="meta/%Y/%m",
         help_text=_("Set the Open Graph image."),
-        formats={"recommended": ("default", ("crop", (1200, 630)))},
+        formats={"opengraph": ("default", ("crop", (1200, 630)))},
     )
     meta_canonical = models.URLField(
         _("canonical URL"),
@@ -78,7 +78,7 @@ class MetaMixin(models.Model):
     def meta_images_dict(self):
         if self.meta_image:
             return {
-                "image": str(self.meta_image.recommended),
+                "image": str(self.meta_image.opengraph),
                 "image:width": 1200,
                 "image:height": 630,
             }
