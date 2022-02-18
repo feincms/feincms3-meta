@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from django import test
 from django.test.utils import override_settings
 from django.utils.functional import lazy
@@ -85,6 +87,27 @@ class MetaTest(test.TestCase):
         )
 
         # print(str(meta_tags([m], request=request)))
+
+    def test_model_images(self):
+        m = SimpleNamespace(meta_image=SimpleNamespace(opengraph="hello/world.jpg"))
+        self.assertEqual(
+            Model.meta_images_dict(m),
+            {"image": "hello/world.jpg", "image:width": 1200, "image:height": 630},
+        )
+
+        m = SimpleNamespace(
+            meta_image=None, image=SimpleNamespace(url="hello/world.jpg")
+        )
+        self.assertEqual(
+            Model.meta_images_dict(m),
+            {"image": "hello/world.jpg"},
+        )
+
+        m = SimpleNamespace(meta_image=None)
+        self.assertEqual(
+            Model.meta_images_dict(m),
+            {"image": ""},
+        )
 
     def test_unknown_attribute_not_rendered(self):
         request = test.RequestFactory().get("/")
