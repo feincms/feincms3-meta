@@ -135,3 +135,20 @@ class MetaTest(test.TestCase):
 
         mt["url"] = "test"
         self.assertEqual(str(mt), '<meta property="og:url" content="test">')
+
+    def test_no_quoting_of_safe_values(self):
+        request = test.RequestFactory().get("/")
+        self.assertEqual(
+            str(meta_tags(request=request, defaults={"title": "stu'ff"}, title="")),
+            """\
+<meta property="og:title" content="stu'ff">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
+        )
+        self.assertEqual(
+            str(meta_tags(request=request, defaults={"title": 'stu"ff'}, title="")),
+            """\
+<meta property="og:title" content="stu&quot;ff">\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">""",
+        )
