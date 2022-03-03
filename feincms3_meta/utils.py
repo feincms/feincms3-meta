@@ -14,6 +14,7 @@ TAGS = [
     ("opengraph", "og:image", "image"),
     ("opengraph", "og:image:width", "image:width"),
     ("opengraph", "og:image:height", "image:height"),
+    ("opengraph", "og:image:alt", "image:alt"),
     ("opengraph", "og:site_name", "site_name"),
     ("opengraph", "og:title", "title"),
     ("opengraph", "og:type", "type"),

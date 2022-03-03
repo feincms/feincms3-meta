@@ -89,14 +89,23 @@ class MetaTest(test.TestCase):
         # print(str(meta_tags([m], request=request)))
 
     def test_model_images(self):
-        m = SimpleNamespace(meta_image=SimpleNamespace(opengraph="hello/world.jpg"))
+        m = SimpleNamespace(
+            meta_image=SimpleNamespace(opengraph="hello/world.jpg"),
+            meta_image_alternative_text="",
+        )
         self.assertEqual(
             Model.meta_images_dict(m),
-            {"image": "hello/world.jpg", "image:width": 1200, "image:height": 630},
+            {
+                "image": "hello/world.jpg",
+                "image:width": 1200,
+                "image:height": 630,
+                "image:alt": "",
+            },
         )
 
         m = SimpleNamespace(
-            meta_image=None, image=SimpleNamespace(url="hello/world.jpg")
+            meta_image=None,
+            image=SimpleNamespace(url="hello/world.jpg"),
         )
         self.assertEqual(
             Model.meta_images_dict(m),
@@ -124,6 +133,9 @@ class MetaTest(test.TestCase):
             "title": "t",
             "description": "desc",
             "image": "/logo.png",
+            "image:width": 1200,
+            "image:height": 630,
+            "image:alt": "Alternative text",
             "robots": "noindex",
         }
     )
@@ -134,6 +146,9 @@ class MetaTest(test.TestCase):
             """\
 <meta property="og:description" content="desc">\
 <meta property="og:image" content="http://testserver/logo.png">\
+<meta property="og:image:width" content="1200">\
+<meta property="og:image:height" content="630">\
+<meta property="og:image:alt" content="Alternative text">\
 <meta property="og:site_name" content="site">\
 <meta property="og:title" content="t">\
 <meta property="og:type" content="website">\

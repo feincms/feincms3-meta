@@ -5,6 +5,8 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+- Added a field for adding an alternative text to the OpenGraph image.
+
 
 `4.1`_ (2022-01-27)
 ~~~~~~~~~~~~~~~~~~~

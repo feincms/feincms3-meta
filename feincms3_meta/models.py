@@ -23,6 +23,12 @@ class MetaMixin(models.Model):
         help_text=_("Set the Open Graph image."),
         formats={"opengraph": ("default", ("crop", (1200, 630)))},
     )
+    meta_image_alternative_text = models.CharField(
+        _("alternative text"),
+        help_text=_("Describe the contents, e.g. for screenreaders."),
+        max_length=1000,
+        blank=True,
+    )
     meta_canonical = models.URLField(
         _("canonical URL"),
         blank=True,
@@ -52,6 +58,7 @@ class MetaMixin(models.Model):
                 "meta_description",
                 "meta_image",
                 "meta_image_ppoi",
+                "meta_image_alternative_text",
                 "meta_canonical",
                 "meta_author",
                 "meta_robots",
@@ -81,6 +88,7 @@ class MetaMixin(models.Model):
                 "image": str(self.meta_image.opengraph),
                 "image:width": 1200,
                 "image:height": 630,
+                "image:alt": self.meta_image_alternative_text,
             }
 
         elif getattr(self, "image", None):
