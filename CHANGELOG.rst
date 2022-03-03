@@ -5,11 +5,21 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.2...main
+
+
+`4.2`_ (2022-03-03)
+~~~~~~~~~~~~~~~~~~~
+
+.. _4.1: https://github.com/matthiask/feincms3-meta/compare/4.1...4.2
+
 - Added a field for adding an alternative text to the OpenGraph image.
 
 
 `4.1`_ (2022-01-27)
 ~~~~~~~~~~~~~~~~~~~
+
+.. _4.1: https://github.com/matthiask/feincms3-meta/compare/4.0...4.1
 
 - Renamed the default image spec for the ``meta_image`` from ``recommended`` to
   ``opengraph``. This shouldn't affect your code except if you referenced the
@@ -115,6 +125,4 @@ Change log
 .. _1.5: https://github.com/matthiask/feincms3-meta/compare/1.4...1.5
 .. _2.0: https://github.com/matthiask/feincms3-meta/compare/1.5...2.0
 .. _3.0: https://github.com/matthiask/feincms3-meta/compare/2.0...3.0
-.. _4.0: https://github.com/matthiask/feincms3-meta/compare/4.0...4.0
-.. _4.1: https://github.com/matthiask/feincms3-meta/compare/4.1...4.1
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.1...master
+.. _4.0: https://github.com/matthiask/feincms3-meta/compare/3.0...4.0
