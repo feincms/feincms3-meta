@@ -1,3 +1,4 @@
+from django.core import checks
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from imagefield.fields import ImageField
@@ -102,3 +103,18 @@ class MetaMixin(models.Model):
             return {"image": self.image.url}
 
         return {"image": ""}
+
+    @classmethod
+    def check(cls, **kwargs):
+        errors = super().check(**kwargs)
+        meta_image = cls._meta.get_field("meta_image")
+        if "opengraph" not in meta_image.formats:
+            errors.append(
+                checks.Error(
+                    'The "opengraph" image format doesn\'t exist',
+                    obj=cls,
+                    id="feincms3_meta.E001",
+                    hint=f'Check IMAGEFIELD_FORMATS and possibly remove the "{cls._meta.label_lower}.meta_image" configuration alltogether.',
+                )
+            )
+        return errors

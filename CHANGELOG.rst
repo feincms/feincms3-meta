@@ -9,6 +9,8 @@ Change log
 
 - Added the empty string to all fields as default value, hopefully making it
   easier to work with subclasses without going through forms etc.
+- Added a system check verifying that the ``opengraph`` image format isn't
+  removed by custom configuration.
 
 
 `4.2`_ (2022-03-03)
