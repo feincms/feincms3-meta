@@ -5,7 +5,13 @@ Change log
 `Next version`_
 ~~~~~~~~~~~~~~~
 
-.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.2...main
+.. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.3...main
+
+
+`4.3`_ (2022-08-02)
+~~~~~~~~~~~~~~~~~~~
+
+.. _4.3: https://github.com/matthiask/feincms3-meta/compare/4.2...4.3
 
 - Added the empty string to all fields as default value, hopefully making it
   easier to work with subclasses without going through forms etc.
@@ -19,7 +25,7 @@ Change log
 `4.2`_ (2022-03-03)
 ~~~~~~~~~~~~~~~~~~~
 
-.. _4.1: https://github.com/matthiask/feincms3-meta/compare/4.1...4.2
+.. _4.2: https://github.com/matthiask/feincms3-meta/compare/4.1...4.2
 
 - Added a field for adding an alternative text to the OpenGraph image.
 
