@@ -118,13 +118,14 @@ class MetaTest(test.TestCase):
             {"image": ""},
         )
 
-    def test_unknown_attribute_not_rendered(self):
+    def test_unknown_attribute_rendered(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(
             str(meta_tags([], request=request, unknown="Stuff")),
             """\
 <meta property="og:type" content="website">\
-<meta property="og:url" content="http://testserver/">""",
+<meta property="og:url" content="http://testserver/">\
+<meta name="unknown" content="Stuff">""",
         )
 
     @override_settings(
@@ -142,7 +143,7 @@ class MetaTest(test.TestCase):
     def test_setting(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(
-            str(meta_tags([], request=request, unknown="Stuff")),
+            str(meta_tags([], request=request)),
             """\
 <meta property="og:description" content="desc">\
 <meta property="og:image" content="http://testserver/logo.png">\
@@ -161,7 +162,7 @@ class MetaTest(test.TestCase):
     def test_setting_none(self):
         request = test.RequestFactory().get("/")
         self.assertEqual(
-            str(meta_tags([], request=request, unknown="Stuff")),
+            str(meta_tags([], request=request)),
             """\
 <meta property="og:type" content="website">\
 <meta property="og:url" content="http://testserver/">""",
@@ -189,4 +190,30 @@ class MetaTest(test.TestCase):
 <meta property="og:title" content="stu&quot;ff">\
 <meta property="og:type" content="website">\
 <meta property="og:url" content="http://testserver/">""",
+        )
+
+    def test_twitter_cards(self):
+        request = test.RequestFactory().get("/")
+        self.assertEqual(
+            str(
+                meta_tags(
+                    [
+                        {
+                            "twitter:card": "summary",
+                            "twitter:site": "@example",
+                            "twitter:creator": "@example",
+                            "_ignored_because_of_underscore": "yes",
+                            "ignored_because_of_falsiness": "",
+                        }
+                    ],
+                    request=request,
+                )
+            ),
+            """\
+<meta property="og:type" content="website">\
+<meta property="og:url" content="http://testserver/">\
+<meta name="twitter:card" content="summary">\
+<meta name="twitter:site" content="@example">\
+<meta name="twitter:creator" content="@example">\
+""",
         )

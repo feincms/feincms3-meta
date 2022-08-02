@@ -25,6 +25,7 @@ TAGS = [
     ("link", "canonical", "canonical"),
 ]
 URLS = {"canonical", "image", "url"}
+KNOWN_KEYS = {tag[2] for tag in TAGS}
 
 
 _attribute_escapes = {
@@ -51,7 +52,7 @@ class MetaTags(dict):
         """
         Return a safe HTML representation of the meta tag dictionary
         """
-        uri = self.get("build_absolute_uri", lambda x: x)
+        uri = self.get("_build_absolute_uri", lambda x: x)
         return mark_safe(
             "".join(
                 TEMPLATES[template].format(
@@ -62,6 +63,18 @@ class MetaTags(dict):
                 )
                 for template, name, key in TAGS
                 if self.get(key)
+            )
+            + "".join(
+                (
+                    TEMPLATES["meta"].format(
+                        name=key,
+                        content=escape_attribute(
+                            uri(str(content)) if key in URLS else str(content)
+                        ),
+                    )
+                    for key, content in self.items()
+                    if content and key[0] != "_" and key not in KNOWN_KEYS
+                )
             )
         )
 
@@ -107,7 +120,7 @@ def meta_tags(objects=(), *, request, defaults=None, **kwargs):
     `The Open Graph protocol <http://ogp.me/>`_ for additional details.
     """
     return MetaTags(
-        build_absolute_uri=request.build_absolute_uri,
+        _build_absolute_uri=request.build_absolute_uri,
         type="website",
         url=request.get_full_path(),
     ).add(getattr(settings, "META_TAGS", None), defaults, *reversed(objects), **kwargs)
