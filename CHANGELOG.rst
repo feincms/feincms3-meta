@@ -11,6 +11,7 @@ Change log
   easier to work with subclasses without going through forms etc.
 - Added a system check verifying that the ``opengraph`` image format isn't
   removed by custom configuration.
+- Added Django 4.1rc1 to the CI.
 
 
 `4.2`_ (2022-03-03)
