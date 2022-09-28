@@ -217,3 +217,13 @@ class MetaTest(test.TestCase):
 <meta name="twitter:creator" content="@example">\
 """,
         )
+
+    @override_settings(
+        IMAGEFIELD_FORMATS={"testapp.model.meta_image": {"blub": ["default"]}}
+    )
+    def test_opengraph_format_check(self):
+        errors = Model.check()
+        self.assertEqual(
+            [error.id for error in errors],
+            ["feincms3_meta.E001"],
+        )
