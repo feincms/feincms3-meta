@@ -7,6 +7,8 @@ Change log
 
 .. _Next version: https://github.com/matthiask/feincms3-meta/compare/4.3...main
 
+- Added Django 4.2 to the CI; dropped 4.0 (3.2 is still there).
+
 
 `4.3`_ (2022-08-02)
 ~~~~~~~~~~~~~~~~~~~
