@@ -5,8 +5,7 @@ from django.test.utils import override_settings
 from django.utils.functional import lazy
 
 from feincms3_meta.utils import MetaTags, meta_tags
-
-from .models import Model
+from testapp.models import Model
 
 
 class MetaTest(test.TestCase):
