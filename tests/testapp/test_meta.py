@@ -235,7 +235,7 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(m.structured_data()),
             """\
-<script type="application/ld+json">[{"https://schema.org/title": [{"@value": "title-test"}], "https://schema.org/description": [{"@value": "description-test"}]}]</script>""",
+<script type="application/ld+json">{"https://schema.org/title": {"@value": "title-test"}, "https://schema.org/description": {"@value": "description-test"}}</script>""",
         )
 
     def test_expanded_json_ld_fallback_test(self):
@@ -244,7 +244,7 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(m.structured_data()),
             """\
-<script type="application/ld+json">[{"https://schema.org/title": [{"@value": "fallback-title-test"}]}]</script>""",
+<script type="application/ld+json">{"https://schema.org/title": {"@value": "fallback-title-test"}}</script>""",
         )
 
     def test_expanded_json_ld_from_custom_model(self):
@@ -253,5 +253,5 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(m.structured_data()),
             """\
-<script type="application/ld+json">[{"https://schema.org/url": [{"@id": "/slug/"}], "https://schema.org/name": [{"@value": "name"}]}]</script>""",
+<script type="application/ld+json">{"https://schema.org/url": {"@id": "/slug/"}, "https://schema.org/name": {"@value": "name"}}</script>""",
         )

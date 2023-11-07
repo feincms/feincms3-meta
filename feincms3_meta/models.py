@@ -19,9 +19,9 @@ class StructuredDataMixin(models.Model):
             value = property.attribute(self, **kwargs)
             if not value:
                 continue
-            data[property.property] = [{property.keyword: value}]
+            data[property.property] = {property.keyword: value}
 
-        script = f'<script type="application/ld+json">{json.dumps([data])}</script>'
+        script = f'<script type="application/ld+json">{json.dumps(data)}</script>'
         return mark_safe(script)
 
 
