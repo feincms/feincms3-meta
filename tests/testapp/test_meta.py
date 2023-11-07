@@ -5,7 +5,8 @@ from django.test.utils import override_settings
 from django.utils.functional import lazy
 
 from feincms3_meta.utils import MetaTags, meta_tags
-from testapp.models import Model
+
+from .models import Model, StructuredDataModel
 
 
 class MetaTest(test.TestCase):
@@ -225,4 +226,32 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             [error.id for error in errors],
             ["feincms3_meta.E001"],
+        )
+
+    def test_expanded_json_ld_from_meta_model(self):
+        m = Model()
+        m.meta_title = "title-test"
+        m.meta_description = "description-test"
+        self.assertEqual(
+            str(m.structured_data()),
+            """\
+<script type="application/ld+json">[{"https://schema.org/title": [{"@value": "title-test"}], "https://schema.org/description": [{"@value": "description-test"}]}]</script>""",
+        )
+
+    def test_expanded_json_ld_fallback_test(self):
+        m = Model()
+        m.title = "fallback-title-test"
+        self.assertEqual(
+            str(m.structured_data()),
+            """\
+<script type="application/ld+json">[{"https://schema.org/title": [{"@value": "fallback-title-test"}]}]</script>""",
+        )
+
+    def test_expanded_json_ld_from_custom_model(self):
+        m = StructuredDataModel()
+        m.name = "name"
+        self.assertEqual(
+            str(m.structured_data()),
+            """\
+<script type="application/ld+json">[{"https://schema.org/url": [{"@id": "/slug/"}], "https://schema.org/name": [{"@value": "name"}]}]</script>""",
         )
