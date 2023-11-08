@@ -1,7 +1,14 @@
+import json
 import re
 
 from django.conf import settings
-from django.utils.html import escape, html_safe, mark_safe
+from django.utils.html import (
+    escape,
+    html_safe,
+    mark_safe,
+    _json_script_escapes,
+    format_html,
+)
 
 
 TEMPLATES = {
@@ -124,3 +131,12 @@ def meta_tags(objects=(), *, request, defaults=None, **kwargs):
         type="website",
         url=request.get_full_path(),
     ).add(getattr(settings, "META_TAGS", None), defaults, *reversed(objects), **kwargs)
+
+
+def escaped_json_to_html(html_template, json_data):
+    from django.core.serializers.json import DjangoJSONEncoder
+
+    json_str = json.dumps(json_data, cls=DjangoJSONEncoder).translate(
+        _json_script_escapes
+    )
+    return format_html(html_template, *(mark_safe(json_str),))

@@ -1,10 +1,8 @@
-import json
-
 from django.core import checks
 from django.db import models
-from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
 from feincms3_meta.fields import StructuredDataField
+from feincms3_meta.utils import escaped_json_to_html
 from imagefield.fields import ImageField
 
 
@@ -14,6 +12,7 @@ class StructuredDataMixin(models.Model):
 
     def structured_data(self, **kwargs):
         data = {}
+        script = ""
 
         for property in self.structured_data_properties:
             value = property.attribute(self, **kwargs)
@@ -21,8 +20,10 @@ class StructuredDataMixin(models.Model):
                 continue
             data[property.property] = {property.keyword: value}
 
-        script = f'<script type="application/ld+json">{json.dumps(data)}</script>'
-        return mark_safe(script)
+        if data:
+            template = '<script type="application/ld+json">{}</script>'
+            script = escaped_json_to_html(template, data)
+        return script
 
 
 class MetaMixin(StructuredDataMixin):
