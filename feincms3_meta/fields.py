@@ -23,6 +23,6 @@ class StructuredDataField(StructuredDataProperty):
         )
 
         if not hasattr(cls, "structured_data_properties"):
-            setattr(cls, "structured_data_properties", [])
+            cls.structured_data_properties = []
 
         cls.structured_data_properties.append(self)

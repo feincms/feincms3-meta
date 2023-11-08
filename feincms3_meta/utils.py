@@ -2,6 +2,7 @@ import json
 import re
 
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.html import (
     escape,
     html_safe,
@@ -134,8 +135,6 @@ def meta_tags(objects=(), *, request, defaults=None, **kwargs):
 
 
 def escaped_json_to_html(html_template, json_data):
-    from django.core.serializers.json import DjangoJSONEncoder
-
     json_str = json.dumps(json_data, cls=DjangoJSONEncoder).translate(
         _json_script_escapes
     )
