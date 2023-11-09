@@ -1,9 +1,10 @@
 from django.core import checks
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from imagefield.fields import ImageField
+
 from feincms3_meta.fields import StructuredDataField
 from feincms3_meta.utils import escaped_json_to_html
-from imagefield.fields import ImageField
 
 
 class StructuredDataMixin(models.Model):

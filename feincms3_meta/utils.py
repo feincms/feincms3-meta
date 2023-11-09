@@ -4,11 +4,11 @@ import re
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.html import (
+    _json_script_escapes,
     escape,
+    format_html,
     html_safe,
     mark_safe,
-    _json_script_escapes,
-    format_html,
 )
 
 
