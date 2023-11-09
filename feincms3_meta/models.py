@@ -1,22 +1,51 @@
 from django.core import checks
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from feincms3_meta.fields import StructuredDataField
+from feincms3_meta.utils import escaped_json_to_html
 from imagefield.fields import ImageField
 
 
-class MetaMixin(models.Model):
-    meta_title = models.CharField(
-        _("title"),
-        max_length=200,
-        blank=True,
-        default="",
-        help_text=_("Used for Open Graph and other meta tags."),
+class StructuredDataMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    def structured_data(self, **kwargs):
+        data = {}
+        script = ""
+
+        for property in self.structured_data_properties:
+            value = property.attribute(self, **kwargs)
+            if not value:
+                continue
+            data[property.property] = {property.keyword: value}
+
+        if data:
+            template = '<script type="application/ld+json">{}</script>'
+            script = escaped_json_to_html(template, data)
+        return script
+
+
+class MetaMixin(StructuredDataMixin):
+    meta_title = StructuredDataField(
+        models.CharField(
+            _("title"),
+            max_length=200,
+            blank=True,
+            default="",
+            help_text=_("Used for Open Graph and other meta tags."),
+        ),
+        "https://schema.org/title",
+        fallback="title",
     )
-    meta_description = models.TextField(
-        _("description"),
-        blank=True,
-        default="",
-        help_text=_("Override the description for this page."),
+    meta_description = StructuredDataField(
+        models.TextField(
+            _("description"),
+            blank=True,
+            default="",
+            help_text=_("Override the description for this page."),
+        ),
+        "https://schema.org/description",
     )
     meta_image = ImageField(
         _("image"),
