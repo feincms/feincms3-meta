@@ -5,8 +5,16 @@ Change log
 Next version
 ~~~~~~~~~~~~
 
-4.4 (2023-11-09)
+4.5 (2023-11-13)
+~~~~~~~~~~~~~~~~~~
+
+- Allow ``type`` and ``context`` keywords and set defaults for JSON+LD
+  structured data.
+
+`4.4`_ (2023-11-09)
 ~~~~~~~~~~~~~~~~
+
+.. _4.4: https://github.com/matthiask/feincms3-meta/compare/4.3...4.4
 
 - Added Django 4.2 to the CI; dropped 4.0 (3.2 is still there).
 - Modernized the package, switched to hatch and ruff.
