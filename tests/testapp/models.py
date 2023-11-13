@@ -9,14 +9,20 @@ class Model(MetaMixin):
     pass
 
 
-class StructuredDataModel(StructuredDataMixin):
+class NaiveStructuredDataModel(StructuredDataMixin):
     name = StructuredDataField(
         models.CharField(max_length=50), "https://schema.org/name"
     )
+
+
+class StructuredDataModel(StructuredDataMixin):
+    name = StructuredDataField(models.CharField(max_length=50), "name")
 
     def get_absolute_url(self):
         return "/slug/"
 
     structured_data_properties = [
-        StructuredDataProperty(get_absolute_url, "https://schema.org/url", "@id")
+        StructuredDataProperty("@context", "https://schema.org/"),
+        StructuredDataProperty("@type", "WebPageElement"),
+        StructuredDataProperty("url", get_absolute_url, "@id"),
     ]
