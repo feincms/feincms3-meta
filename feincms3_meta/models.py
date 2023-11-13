@@ -1,33 +1,50 @@
 from django.core import checks
 from django.db import models
+from django.utils.html import format_html, mark_safe
 from django.utils.translation import gettext_lazy as _
 from imagefield.fields import ImageField
 
-from feincms3_meta.fields import StructuredDataField
-from feincms3_meta.utils import escaped_json_to_html
+from feincms3_meta.fields import (
+    DEFAULT_PROPERTIES,
+    StructuredDataField,
+    StructuredDataProperty,
+)
+from feincms3_meta.utils import escape_json
 
 
 class StructuredDataMixin(models.Model):
+    structured_data_properties = DEFAULT_PROPERTIES
+
     class Meta:
         abstract = True
 
-    def structured_data(self, **kwargs):
+    def structured_data_json(self, **kwargs):
         data = {}
-        script = ""
 
-        for property in self.structured_data_properties:
-            value = property.attribute(self, **kwargs)
+        for sdp in self.structured_data_properties:
+            value = sdp.value(self, **kwargs) if callable(sdp.value) else sdp.value
             if not value:
                 continue
-            data[property.property] = {property.keyword: value}
 
-        if data:
-            template = '<script type="application/ld+json">{}</script>'
-            script = escaped_json_to_html(template, data)
-        return script
+            if sdp.keyword:
+                data[sdp.property] = {sdp.keyword: value}
+            else:
+                data[sdp.property] = value
+
+        return escape_json(data)
+
+    def structured_data(self, **kwargs):
+        json_str = self.structured_data_json(**kwargs)
+        html_template = '<script type="application/ld+json">{}</script>'
+        return format_html(html_template, *(mark_safe(json_str),))
 
 
 class MetaMixin(StructuredDataMixin):
+    structured_data_properties = [
+        StructuredDataProperty("@context", "https://schema.org/"),
+        StructuredDataProperty("@type", "WebPage"),
+    ]
+
     meta_title = StructuredDataField(
         models.CharField(
             _("title"),
@@ -36,7 +53,7 @@ class MetaMixin(StructuredDataMixin):
             default="",
             help_text=_("Used for Open Graph and other meta tags."),
         ),
-        "https://schema.org/title",
+        "title",
         fallback="title",
     )
     meta_description = StructuredDataField(
@@ -46,7 +63,7 @@ class MetaMixin(StructuredDataMixin):
             default="",
             help_text=_("Override the description for this page."),
         ),
-        "https://schema.org/description",
+        "description",
     )
     meta_image = ImageField(
         _("image"),
