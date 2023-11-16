@@ -53,7 +53,7 @@ class MetaMixin(StructuredDataMixin):
             default="",
             help_text=_("Used for Open Graph and other meta tags."),
         ),
-        "title",
+        "name",
         fallback="title",
     )
     meta_description = StructuredDataField(
@@ -65,14 +65,19 @@ class MetaMixin(StructuredDataMixin):
         ),
         "description",
     )
-    meta_image = ImageField(
-        _("image"),
-        blank=True,
-        default="",
-        auto_add_fields=True,
-        upload_to="meta/%Y/%m",
-        help_text=_("Set the Open Graph image."),
-        formats={"opengraph": ("default", ("crop", (1200, 630)))},
+    meta_image = StructuredDataField(
+        ImageField(
+            _("image"),
+            blank=True,
+            default="",
+            auto_add_fields=True,
+            upload_to="meta/%Y/%m",
+            help_text=_("Set the Open Graph image."),
+            formats={"opengraph": ("default", ("crop", (1200, 630)))},
+        ),
+        "image",
+        fallback="image",
+        callback=lambda attr: attr.opengraph if attr else "",
     )
     meta_image_alternative_text = models.CharField(
         _("alternative text"),

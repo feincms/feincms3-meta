@@ -19,14 +19,17 @@ DEFAULT_PROPERTIES = getattr(
 
 
 class StructuredDataField(StructuredDataProperty):
-    def __init__(self, field, property, *args, fallback="", **kwargs):
+    def __init__(
+        self, field, property, *args, fallback="", callback=lambda attr: attr, **kwargs
+    ):
         self.field = field
         self.fallback = fallback
+        self.callback = callback
         super().__init__(property, *args, **kwargs)
 
     def contribute_to_class(self, cls, name):
         self.field.contribute_to_class(cls, name)
-        self.value = lambda obj: (
+        self.value = lambda obj: self.callback(
             getattr(obj, name)
             or (
                 getattr(obj, self.fallback)
