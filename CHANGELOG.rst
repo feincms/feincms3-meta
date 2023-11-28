@@ -5,14 +5,21 @@ Change log
 Next version
 ~~~~~~~~~~~~
 
-4.5 (2023-11-13)
-~~~~~~~~~~~~~~~~~~
+4.6 (2023-11-28)
+~~~~~~~~~~~~~~~~
+
+- Add coerce function for structured data properties. More flexible property setup.
+
+`4.5`_ (2023-11-13)
+~~~~~~~~~~~~~~~~~~~
+
+.. _4.5: https://github.com/matthiask/feincms3-meta/compare/4.4...4.5
 
 - Allow ``type`` and ``context`` keywords and set defaults for JSON+LD
   structured data.
 
 `4.4`_ (2023-11-09)
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. _4.4: https://github.com/matthiask/feincms3-meta/compare/4.3...4.4
 
