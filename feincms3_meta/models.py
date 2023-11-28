@@ -18,23 +18,15 @@ class StructuredDataMixin(models.Model):
     class Meta:
         abstract = True
 
-    def structured_data_json(self, **kwargs):
+    def structured_data_json(self):
         data = {}
-
         for sdp in self.structured_data_properties:
-            value = sdp.value(self, **kwargs) if callable(sdp.value) else sdp.value
-            if not value:
-                continue
-
-            if sdp.keyword:
-                data[sdp.property] = {sdp.keyword: value}
-            else:
-                data[sdp.property] = value
+            data.update(sdp.to_ld_dict(self))
 
         return escape_json(data)
 
-    def structured_data(self, **kwargs):
-        json_str = self.structured_data_json(**kwargs)
+    def structured_data(self):
+        json_str = self.structured_data_json()
         html_template = '<script type="application/ld+json">{}</script>'
         return format_html(html_template, *(mark_safe(json_str),))
 
@@ -53,8 +45,8 @@ class MetaMixin(StructuredDataMixin):
             default="",
             help_text=_("Used for Open Graph and other meta tags."),
         ),
-        "title",
-        fallback="title",
+        "name",
+        coerce=lambda obj, _: obj.meta_title or obj.title,
     )
     meta_description = StructuredDataField(
         models.TextField(
@@ -65,14 +57,18 @@ class MetaMixin(StructuredDataMixin):
         ),
         "description",
     )
-    meta_image = ImageField(
-        _("image"),
-        blank=True,
-        default="",
-        auto_add_fields=True,
-        upload_to="meta/%Y/%m",
-        help_text=_("Set the Open Graph image."),
-        formats={"opengraph": ("default", ("crop", (1200, 630)))},
+    meta_image = StructuredDataField(
+        ImageField(
+            _("image"),
+            blank=True,
+            default="",
+            auto_add_fields=True,
+            upload_to="meta/%Y/%m",
+            help_text=_("Set the Open Graph image."),
+            formats={"opengraph": ("default", ("crop", (1200, 630)))},
+        ),
+        "image",
+        coerce=lambda _, value: value.opengraph if value else "",
     )
     meta_image_alternative_text = models.CharField(
         _("alternative text"),

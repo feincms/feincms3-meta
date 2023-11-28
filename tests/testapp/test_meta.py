@@ -231,10 +231,13 @@ class MetaTest(test.TestCase):
         m = Model()
         m.meta_title = "title-test"
         m.meta_description = "description-test"
+        m.meta_image = SimpleNamespace(
+            opengraph="hello/world.jpg", width="300", height="300"
+        )
         self.assertEqual(
             str(m.structured_data()),
             """\
-<script type="application/ld+json">{"@context": "https://schema.org/", "@type": "WebPage", "title": "title-test", "description": "description-test"}</script>""",
+<script type="application/ld+json">{"@context": "https://schema.org/", "@type": "WebPage", "name": "title-test", "description": "description-test", "image": "hello/world.jpg"}</script>""",
         )
 
     def test_expanded_json_ld_fallback_test(self):
@@ -243,18 +246,10 @@ class MetaTest(test.TestCase):
         self.assertEqual(
             str(m.structured_data()),
             """\
-<script type="application/ld+json">{"@context": "https://schema.org/", "@type": "WebPage", "title": "fallback-title-test"}</script>""",
+<script type="application/ld+json">{"@context": "https://schema.org/", "@type": "WebPage", "name": "fallback-title-test"}</script>""",
         )
 
     def test_expanded_json_ld_from_custom_model(self):
-        #         m = NaiveStructuredDataModel()
-        #         m.name = "test-name"
-        #         self.assertEqual(
-        #             str(m.structured_data()),
-        #             """\
-        # <script type="application/ld+json">{"@context": "https://schema.org/", "@type": "WebPageElement", "url": {"@id": "/slug/"}, "name": "test-name"}</script>""",
-        #         )
-
         m = StructuredDataModel()
         m.name = "test-name"
         self.assertEqual(
