@@ -5,6 +5,8 @@ Change log
 Next version
 ~~~~~~~~~~~~
 
+- Added Python 3.12 and Django 5.0.
+
 4.6 (2023-11-28)
 ~~~~~~~~~~~~~~~~
 
