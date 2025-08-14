@@ -1,7 +1,7 @@
 exclude: ".yarn/|yarn.lock|\\.min\\.(css|js)$"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-builtin-literals
@@ -14,40 +14,27 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.15.0
+    rev: 1.25.0
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
-  - repo: https://github.com/MarcoGorelli/absolufy-imports
-    rev: v0.3.1
-    hooks:
-      - id: absolufy-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.1.5"
+    rev: "v0.12.8"
     hooks:
       - id: ruff
+        args: [--unsafe-fixes]
       - id: ruff-format
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
+  - repo: https://github.com/biomejs/pre-commit
+    rev: "v2.1.4"
     hooks:
-      - id: prettier
-        args: [--list-different, --no-semi]
-        exclude: "^conf/|.*\\.html$"
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.53.0
-    hooks:
-      - id: eslint
-        additional_dependencies:
-          - eslint
-          - eslint-config-prettier
-          - "@babel/core"
-          - "@babel/eslint-parser"
-          - "@babel/preset-env"
+      - id: biome-check
+        args: [--unsafe]
+        verbose: true
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 1.4.1
+    rev: v2.6.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.15
+    rev: v0.24.1
     hooks:
       - id: validate-pyproject
