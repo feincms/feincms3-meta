@@ -25,6 +25,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
   "Topic :: Software Development",
   "Topic :: Software Development :: Libraries :: Application Frameworks",
@@ -41,17 +42,20 @@ optional-dependencies.tests = [
 ]
 urls.Homepage = "https://github.com/matthiask/feincms3-meta/"
 
-[tool.hatch.version]
-path = "feincms3_meta/__init__.py"
-
-[tool.hatch.build]
-include = [ "feincms3_meta/" ]
+[tool.hatch]
+build.include = [ "feincms3_meta/" ]
+version.path = "feincms3_meta/__init__.py"
 
 [tool.ruff]
 target-version = "py39"
-
 fix = true
 show-fixes = true
+extend-ignore = [
+  # Allow zip() without strict=
+  "B905",
+  # No line length errors
+  "E501",
+]
 extend-select = [
   # pyflakes, pycodestyle
   "F",
@@ -91,12 +95,6 @@ extend-select = [
   "PLW",
   # unused noqa
   "RUF100",
-]
-extend-ignore = [
-  # Allow zip() without strict=
-  "B905",
-  # No line length errors
-  "E501",
 ]
 isort.combine-as-imports = true
 isort.lines-after-imports = 2
