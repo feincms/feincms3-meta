@@ -48,7 +48,7 @@ def escape_attribute(s):
     agents do not seem to interpret HTML entities in Open Graph values
     correctly.
     """
-    if re.match(r"^[-\w\s_'&:;.,/()]+$", s, re.I | re.U):
+    if re.match(r"^[-\w\s_'&:;.,/()]+$", s, re.IGNORECASE | re.UNICODE):
         return s.translate(_attribute_escapes)
     return escape(s)
 
